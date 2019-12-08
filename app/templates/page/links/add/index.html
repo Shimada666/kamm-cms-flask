@@ -1,0 +1,57 @@
+{% extends 'layout/index.html' %}
+
+{% block body %}
+<div class="childrenBody">
+	<form class="layui-form" style="width:80%;" method="post">
+		<div class="layui-form-item">
+			<label class="layui-form-label">网站名称</label>
+			<div class="layui-input-block">
+				<input type="text" name="title" class="layui-input linksName" lay-verify="required" placeholder="请输入网站名称">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">网站地址</label>
+			<div class="layui-input-block">
+				<input type="tel" name="url" class="layui-input linksUrl" lay-verify="required|url" placeholder="请输入网站地址">
+			</div>
+		</div>
+		<div class="layui-form-item">
+{#			<div class="layui-inline">#}
+{#				<label class="layui-form-label">展示位置</label>#}
+{#				<div class="layui-input-block">#}
+{#					<input type="checkbox" name="homePage" title="首页" checked>#}
+{#					<input type="checkbox" name="subPage" title="子页">#}
+{#				</div>#}
+{#			</div>#}
+			<div class="layui-inline">
+				<label class="layui-form-label">发布时间</label>
+				<div class="layui-input-inline">
+					<input type="text" name="create-time" class="layui-input linksTime" lay-verify="date" onclick="layui.laydate({elem:this})" placeholder="点击选择发布时间">
+				</div>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">站长邮箱</label>
+			<div class="layui-input-block">
+				<input type="text" name="email" class="layui-input masterEmail" lay-verify="email" placeholder="请输入网站地址">
+			</div>
+		</div>
+{#		<div class="layui-form-item">#}
+{#			<label class="layui-form-label">站点描述</label>#}
+{#			<div class="layui-input-block">#}
+{#				<textarea placeholder="请输入站点描述" class="layui-textarea linksDesc"></textarea>#}
+{#			</div>#}
+{#		</div>#}
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" lay-submit="" lay-filter="addLinks">立即提交</button>
+				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+		    </div>
+		</div>
+	</form>
+</div>
+{% endblock %}
+{% block js %}
+    {{ super() }}
+{% endblock %}
