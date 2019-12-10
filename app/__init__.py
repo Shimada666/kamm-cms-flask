@@ -161,7 +161,7 @@ def register_commands(app):
     @app.cli.command()
     def admin():
         click.echo('正在创建管理员账户...')
-        admin_account = User.query.filter_by(username='admin')
+        admin_account = User.query.filter_by(username='admin').first()
         if admin_account is not None:
             click.echo('管理员账户已存在...正在更新帐号密码为admin...')
             admin_account.username = 'admin'
