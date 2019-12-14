@@ -22,7 +22,7 @@ class DevelopmentSecure(BaseConfig):
     """
     开发环境安全性配置
     """
-    SQLALCHEMY_DATABASE_URI = 'mysql+cymysql://root:root@localhost/kamm?charset=utf8mb4'
+    SQLALCHEMY_DATABASE_URI = os.getenv('db_url', 'mysql+cymysql://root:root@localhost/kamm?charset=utf8mb4')
     # SQLALCHEMY_DATABASE_URI = prefix + os.path.join(basedir, 'data-dev.db')
 
     SQLALCHEMY_ECHO = False
@@ -34,7 +34,7 @@ class ProductionSecure(BaseConfig):
     """
     生产环境安全性配置
     """
-    SQLALCHEMY_DATABASE_URI = 'mysql+cymysql://root:root@localhost/kamm?charset=utf8mb4'
+    SQLALCHEMY_DATABASE_URI = os.getenv('db_url', 'mysql+cymysql://root:root@localhost/kamm?charset=utf8mb4')
     # SQLALCHEMY_DATABASE_URI = prefix + os.path.join(basedir, 'data-dev.db')
 
     SQLALCHEMY_ECHO = False

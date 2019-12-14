@@ -37,12 +37,12 @@ from app.models.friend_links import FriendLinks
 def main():
     app = create_app()
     with app.app_context():
-        for link in links:
-            address = True if link['showAddress'] == '首页' else False
-            l = FriendLinks(id=link['linksId'], title=link['linksName'], url=link['linksUrl'],
-                            email=link['masterEmail'], create_time=link['linksTime'], show_address=address)
-            db.session.add(l)
-        db.session.commit()
+        with db.auto_commit():
+            for link in links:
+                address = True if link['showAddress'] == '首页' else False
+                l = FriendLinks(id=link['linksId'], title=link['linksName'], url=link['linksUrl'],
+                                email=link['masterEmail'], create_time=link['linksTime'], show_address=address)
+                db.session.add(l)
 
 
 if __name__ == '__main__':

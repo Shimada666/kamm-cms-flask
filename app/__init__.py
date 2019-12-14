@@ -165,11 +165,10 @@ def register_commands(app):
         if admin_account is not None:
             click.echo('管理员账户已存在...正在更新帐号密码为admin...')
             admin_account.username = 'admin'
-            # admin.set_password(password)
-            admin_account.password = 'admin'
+            admin_account.set_password('admin')
         else:
-            click.echo('正在创建管理员...')
-            admin_account = User(username='admin', password='admin')
+            admin_account = User(username='admin')
+            admin_account.set_password('admin')
             db.session.add(admin_account)
         db.session.commit()
         click.echo('创建成功.')

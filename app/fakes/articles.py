@@ -255,14 +255,15 @@ from app.models.articles import Article
 def main():
     app = create_app()
     with app.app_context():
-        for article in articles:
-            status = True if article['newsStatus'] == '审核通过' else False
-            look = True if article['newsLook'] == '开放浏览' else False
-            show = True if article['isShow'] == 'checked' else False
-            a = Article(id=article['newsId'], title=article['newsName'], author=article['newsAuthor'], status=status,
-                        look=look, show=show, create_time=article['newsTime'])
-            db.session.add(a)
-        db.session.commit()
+        with db.auto_commit():
+            for article in articles:
+                status = True if article['newsStatus'] == '审核通过' else False
+                look = True if article['newsLook'] == '开放浏览' else False
+                show = True if article['isShow'] == 'checked' else False
+                a = Article(id=article['newsId'], title=article['newsName'], author=article['newsAuthor'], status=status,
+                            look=look, show=show, create_time=article['newsTime'])
+                db.session.add(a)
+
 
 if __name__ == '__main__':
     main()

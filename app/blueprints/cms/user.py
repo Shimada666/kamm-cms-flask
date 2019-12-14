@@ -40,7 +40,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash('已退出！')
+    flash('已退出！', 1)
     return redirect(url_for('home.index'))
 
 
@@ -57,7 +57,7 @@ def information():
             current_user.email = form.email.data
             current_user.about = form.about.data
             db.session.commit()
-            flash('修改成功!')
+            flash('修改成功!', 1)
         else:
             flash(form.errors_info)
     return common_render('page/user/information/index.html')

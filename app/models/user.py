@@ -1,5 +1,6 @@
 from flask_login import UserMixin
 from app.extensions import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class User(db.Model, UserMixin):
@@ -16,8 +17,18 @@ class User(db.Model, UserMixin):
     avatar = db.Column(db.String(64))
     about = db.Column(db.Text)
 
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
+
     def validate_password(self, password):
-        if self.password == password:
+        return check_password_hash(self.password, password)
+
+    def reset_password(self, old_password, new_password):
+        #: attention,remember to commit
+        #: 注意，修改密码后记得提交至数据库
+        # if self.validate_password(new_password):
+        #     self.set_password(new_password)
+        if self.validate_password(old_password):
+            self.password = new_password
             return True
         return False
-        # return check_password_hash(self.password_hash, password)
