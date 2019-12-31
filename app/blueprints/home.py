@@ -8,6 +8,7 @@
 
 from flask import Blueprint, render_template
 from app.libs.utils import common_render
+from app.libs.decorators import admin_required
 
 
 def create_home():
@@ -24,5 +25,7 @@ def index():
 
 
 @home_bp.route('/404')
+# @admin_required
 def not_found():
-    return common_render('page/error/404/index.html')
+    # return common_render('page/error/404/index.html')
+    return common_render('page/error/index.html', msg='qwe', code=123)

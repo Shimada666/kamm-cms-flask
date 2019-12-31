@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask import request, flash
-from app.exceptions.base import ParameterException, FormErrorException
+from app.exceptions.base import ParameterException
 from app.libs.utils import common_render
 from wtforms import StringField, SubmitField, TextAreaField, PasswordField, BooleanField, RadioField
 from wtforms.validators import DataRequired, Email, length, Optional, URL, EqualTo, Regexp

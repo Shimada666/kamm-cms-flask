@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
@@ -15,9 +15,9 @@
         <link rel="stylesheet/less" type="text/less" href="{{ url_for('static', filename='static/css/common.less') }}">
         {#less IE支持的最高版本3.8.0#}
 {#        <script src="https://cdn.bootcss.com/less.js/3.8.0/less.min.js"></script>#}
-        <script src="{{ url_for('static', filename='static/js/less.min.js') }}"></script>
-        <link rel="stylesheet" href="//at.alicdn.com/t/font_tnyc012u2rlwstt9.css" media="all"/>
         {{ Helper.get_style(path)|safe }}
+        <link rel="stylesheet" href="//at.alicdn.com/t/font_tnyc012u2rlwstt9.css" media="all"/>
+        <script type="text/javascript" src="{{ url_for('static', filename='static/js/less.min.js') }}"></script>
     {% endblock %}
 </head>
 <body>

@@ -10,15 +10,21 @@ from werkzeug.exceptions import HTTPException
 from werkzeug._compat import text_type
 
 
-class FormErrorException(HTTPException):
-    def __init__(self, path, msg='表单提交错误!'):
-        self.path = path
-        self.msg = msg
-        self.render()
+class WebException(HTTPException):
+    code = 500
+    msg = '抱歉，服务器未知错误'
 
-    def render(self):
-        flash(self.msg)
-        return common_render(self.path)
+    def __init__(self, msg=None, code=None, headers=None):
+        if code:
+            self.code = code
+        if msg:
+            self.msg = msg
+        if headers is not None:
+            headers_merged = headers.copy()
+            headers_merged.update(self.headers)
+            self.headers = headers_merged
+
+        super(WebException, self).__init__(msg, None)
 
 
 class APIException(HTTPException):

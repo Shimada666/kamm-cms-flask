@@ -17,8 +17,8 @@ from app.models.user import User
 # from flask_sqlalchemy import get_debug_queries
 # from flask_wtf.csrf import CSRFError
 
-from app.extensions import login_manager, db, csrf
-from app.exceptions.base import APIException, HTTPException, UnknownException, FormErrorException
+from app.extensions import login_manager, db, csrf, migrate
+from app.exceptions.base import APIException, HTTPException, UnknownException, WebException
 
 
 def create_app(environment='development'):
@@ -87,6 +87,7 @@ def register_extensions(app):
     db.init_app(app)
     login_manager.init_app(app)
     csrf.init_app(app)
+    migrate.init_app(app, db)
 
 
 def register_blueprints(app):
@@ -99,30 +100,31 @@ def register_blueprints(app):
 
 
 def register_shell_context(app: Flask):
-    from app.models.user import User
+    from app.models.user import User, Group, Auth
     from app.models.articles import Article
     from app.models.friend_links import FriendLinks
     @app.shell_context_processor
     def make_shell_context():
-        return dict(db=db, User=User, Article=Article, FriendLinks=FriendLinks)
+        return dict(db=db, User=User, Article=Article, FriendLinks=FriendLinks, Group=Group, Auth=Auth)
 
 
 def register_errors(app):
     @app.errorhandler(404)
     def page_not_found(e):
-        return common_render('page/error/404/index.html'), 404
+        return common_render('page/error/index.html', msg='页面不存在！', code=e.code), 404
 
     @app.errorhandler(Exception)
     def handler(e):
-        if isinstance(e, FormErrorException):
-            return e
+        if isinstance(e, WebException):
+            return common_render('page/error/index.html', msg=e.msg, code=e.code), e.code
         if isinstance(e, APIException):
             return e
         if isinstance(e, HTTPException):
-            code = e.code
-            msg = e.description
-            error_code = 20000
-            return APIException(msg, code, error_code)
+            e.code = e.code
+            e.msg = e.description
+            return common_render('page/error/index.html', msg=e.msg, code=e.code), e.code
+            # error_code = 20000
+            # return APIException(msg, code, error_code)
         else:
             if not app.config['DEBUG']:
                 import traceback

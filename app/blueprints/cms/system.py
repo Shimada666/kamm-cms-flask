@@ -58,27 +58,28 @@ def navs():
             "href": f"{url_for('cms.system+info')}",
             "spread": False
         },
-        {
-            "title": "其他页面",
-            "icon": "&#xe630;",
-            "href": "",
-            "spread": False,
-            "children": [
-                {
-                    "title": "404页面",
-                    "icon": "&#xe61c;",
-                    "href": f"{url_for('cms.error+not_found')}",
-                    "spread": False
-                },
-                {
-                    "title": "登录",
-                    "icon": "&#xe609;",
-                    "href": f"{url_for('cms.user+login')}",
-                    "spread": False,
-                    "target": "_blank"
-                }
-            ]
-        }]
+        # {
+        #     "title": "其他页面",
+        #     "icon": "&#xe630;",
+        #     "href": "",
+        #     "spread": False,
+        #     "children": [
+        #         {
+        #             "title": "404页面",
+        #             "icon": "&#xe61c;",
+        #             "href": f"{url_for('cms.error+not_found')}",
+        #             "spread": False
+        #         },
+        #         {
+        #             "title": "登录",
+        #             "icon": "&#xe609;",
+        #             "href": f"{url_for('cms.user+login')}",
+        #             "spread": False,
+        #             "target": "_blank"
+        #         }
+        #     ]
+        # }
+    ]
     return jsonify(res)
 
 

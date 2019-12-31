@@ -10,6 +10,7 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy
 from flask_wtf import CSRFProtect
 from contextlib import contextmanager
+from flask_migrate import Migrate
 
 
 class SQLAlchemy(_SQLAlchemy):
@@ -26,6 +27,7 @@ class SQLAlchemy(_SQLAlchemy):
 login_manager = LoginManager()
 db = SQLAlchemy()
 csrf = CSRFProtect()
+migrate = Migrate()
 
 
 @login_manager.user_loader

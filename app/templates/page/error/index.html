@@ -1,0 +1,24 @@
+{% extends 'layout/index.html' %}
+
+{% block title %}错误：{{ code }}{% endblock %}
+
+{% block body %}
+    <div class="bg">
+        <div class="error-card radius6px" style="background-color:rgba(255,255,255,.8)">
+            <div class="error-title" style="font-weight: 300">
+                {#                            <div class="mdui-m-l-1 mdui-m-t-1" style="white-space: normal">错误：{{ e.code }}</div>#}
+                <div class="mdui-m-l-1 mdui-m-t-1">错误 - {{ code }}</div>
+            </div>
+            <div class="error-content" style="font-weight: 300">
+                <div>{{ msg }}</div>
+            </div>
+            <div class="error-btn-wrapper">
+                <a href="/" class="error-btn gradient-45deg-purple-deep-orange mdui-text-color-white mdui-shadow-4" style="border-radius: 150px; font-weight: 300">返回主页
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}
