@@ -23,3 +23,17 @@ home_bp = create_home()
 @home_bp.route('/')
 def index():
     return common_render('page/index/index.html')
+
+
+@home_bp.route('/404')
+@route_meta(auth='测试', module='测试')
+@group_required
+def not_found():
+    return common_render('page/error/index.html', msg='测试', code=123)
+
+
+@home_bp.route('/405')
+@route_meta(auth='测试1', module='测试')
+@group_required
+def not_found1():
+    return common_render('page/error/index.html', msg='测试', code=123)

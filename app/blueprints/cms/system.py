@@ -29,12 +29,40 @@ def navs():
             "href": f"{url_for('demo.main_page')}",
             "spread": False
         },
-        # {
-        #     "title": "文章列表",
-        #     "icon": "icon-text",
-        #     "href": f"{url_for('demo.articles+get_list')}",
-        #     "spread": False
-        # },
+        {
+            "title": "用户管理",
+            "icon": "&#xe612;",
+            "spread": False,
+            "children": [
+                {
+                    "title": "用户列表",
+                    "href": f"{url_for('cms.auth+get_users')}",
+                    "spread": False
+                },
+                {
+                    "title": "添加用户",
+                    "href": f"{url_for('cms.auth+create_user')}",
+                    "spread": False,
+                }
+            ]
+        },
+        {
+            "title": "分组管理",
+            "icon": "&#xe647;",
+            "spread": False,
+            "children": [
+                {
+                    "title": "分组列表",
+                    "href": f"{url_for('demo.friend-links+links_list')}",
+                    "spread": False
+                },
+                {
+                    "title": "添加分组",
+                    "href": f"{url_for('demo.friend-links+links_add')}",
+                    "spread": False,
+                }
+            ]
+        },
         {
             "title": "友情链接",
             "icon": "&#xe64c;",
@@ -97,4 +125,4 @@ def info():
         "框架描述": "一套flask+layui的开发框架",
         "技术支持": "copyright @2019 Shimada666",
     }
-    return common_render('page/system-info/index.html', info=res)
+    return common_render('page/system_info/index.html', info=res)

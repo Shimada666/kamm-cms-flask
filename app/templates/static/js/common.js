@@ -1,5 +1,7 @@
 layui.use(['form', 'layer', 'jquery', 'upload', 'laydate'], function () {
-    var $ = layui.jquery;
+    var $ = layui.jquery,
+        form = layui.form(),
+        layer = layui.layer;
     $.ajaxSetup({
         timeout: 4000,
         contentType: "application/json",
@@ -45,4 +47,14 @@ layui.use(['form', 'layer', 'jquery', 'upload', 'laydate'], function () {
 
         }
     });
+
+    form.on('checkbox(all-choose)', function (data) {
+        var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
+        child.each(function (index, item) {
+            item.checked = data.elem.checked;
+        });
+        form.render('checkbox');
+    });
+
+
 })

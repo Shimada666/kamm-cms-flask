@@ -13,6 +13,10 @@ layui.define(["form", "element", "jquery"], function (exports) {
             }
         };
 
+    function refreshCurrentTab(){
+        $(".childFrame .layui-tab-item.layui-show").find("iframe")[0].contentWindow.location.reload(true);
+    }
+
     //获取二级菜单数据
     Tab.prototype.render = function () {
         var url = this.tabConfig.url;
@@ -115,6 +119,7 @@ layui.define(["form", "element", "jquery"], function (exports) {
                 that.tabMove(); //顶部窗口是否可滚动
             }
         }
+        refreshCurrentTab()
     }
 
     //顶部窗口移动
@@ -230,6 +235,7 @@ layui.define(["form", "element", "jquery"], function (exports) {
             }
         }
         element.tabChange(tabFilter, $(this).attr("lay-id")).init();
+        refreshCurrentTab()
         // new Tab().tabMove();
     })
 

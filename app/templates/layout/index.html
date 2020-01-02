@@ -35,9 +35,9 @@
             const layer = layui.layer;
             {% for message in get_flashed_messages(with_categories=True) %}
                 {% if message[0] != "message" %}
-                    layer.msg("{{ message[1] | safe }}", {icon: "{{ message[0] }}", time: 1500})
+                    layer.msg("{{ message[1] | safe }}", {icon: "{{ message[0] }}", time: 5000})
                 {% else %}
-                    layer.msg("{{ message[1] | safe }}", {time: 1500})
+                    layer.msg("{{ message[1] | safe }}", {time: 5000})
                 {% endif %}
             {% endfor %}
         });

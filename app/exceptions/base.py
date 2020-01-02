@@ -29,7 +29,12 @@ class WebException(HTTPException):
 
 class WebAuthFailed(WebException):
     code = 403
-    msg = '您的权限不足！'
+    msg = '您的权限不足'
+
+
+class WebNotFound(WebException):
+    code = 404
+    msg = '资源不存在'
 
 
 class APIException(HTTPException):
