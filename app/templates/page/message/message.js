@@ -142,7 +142,7 @@ layui.config({
             var replyHtml = '',msgStr;
             replyHtml += '<tr>';
             replyHtml += '  <td class="msg_info">';
-            replyHtml += '    <img src="/static/images/face.jpg" width="50" height="50">';
+            replyHtml += '    <img src="/static/images/avatar.png" width="50" height="50">';
             replyHtml += '    <div class="user_info">';
             replyHtml += '        <h2>请叫我马哥</h2>';
             replyHtml += '        <p>'+layedit.getContent(editIndex)+'</p>';

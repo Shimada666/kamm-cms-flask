@@ -22,92 +22,104 @@ system_rp = Redprint('system')
 
 @system_rp.route('/navs')
 def navs():
-    res = [
-        {
-            "title": "后台首页",
-            "icon": "icon-computer",
-            "href": f"{url_for('demo.main_page')}",
-            "spread": False
-        },
-        {
-            "title": "用户管理",
-            "icon": "&#xe612;",
-            "spread": False,
-            "children": [
-                {
-                    "title": "用户列表",
-                    "href": f"{url_for('cms.auth+get_users')}",
-                    "spread": False
-                },
-                {
-                    "title": "添加用户",
-                    "href": f"{url_for('cms.auth+create_user')}",
-                    "spread": False,
-                }
-            ]
-        },
-        {
-            "title": "分组管理",
-            "icon": "&#xe647;",
-            "spread": False,
-            "children": [
-                {
-                    "title": "分组列表",
-                    "href": f"{url_for('demo.friend-links+links_list')}",
-                    "spread": False
-                },
-                {
-                    "title": "添加分组",
-                    "href": f"{url_for('demo.friend-links+links_add')}",
-                    "spread": False,
-                }
-            ]
-        },
-        {
-            "title": "友情链接",
-            "icon": "&#xe64c;",
-            "href": f"",
-            "spread": False,
-            "children": [
-                {
-                    "title": "链接列表",
-                    "href": f"{url_for('demo.friend-links+links_list')}",
-                    "spread": False
-                },
-                {
-                    "title": "添加链接",
-                    "href": f"{url_for('demo.friend-links+links_add')}",
-                    "spread": False,
-                }
-            ]
-        }, {
-            "title": "系统基本参数",
-            "icon": "&#xe631;",
-            "href": f"{url_for('cms.system+info')}",
-            "spread": False
-        },
-        # {
-        #     "title": "其他页面",
-        #     "icon": "&#xe630;",
-        #     "href": "",
-        #     "spread": False,
-        #     "children": [
-        #         {
-        #             "title": "404页面",
-        #             "icon": "&#xe61c;",
-        #             "href": f"{url_for('cms.error+not_found')}",
-        #             "spread": False
-        #         },
-        #         {
-        #             "title": "登录",
-        #             "icon": "&#xe609;",
-        #             "href": f"{url_for('cms.user+login')}",
-        #             "spread": False,
-        #             "target": "_blank"
-        #         }
-        #     ]
-        # }
-    ]
+    if current_user.is_authenticated and current_user.is_admin:
+        res = [
+            {
+                "title": "后台首页",
+                "icon": "icon-computer",
+                "href": f"{url_for('demo.main_page')}",
+                "spread": False
+            },
+            {
+                "title": "用户管理",
+                "icon": "&#xe612;",
+                "spread": False,
+                "children": [
+                    {
+                        "title": "用户列表",
+                        "href": f"{url_for('cms.auth+get_users')}",
+                        "spread": False
+                    },
+                    {
+                        "title": "添加用户",
+                        "href": f"{url_for('cms.auth+create_user')}",
+                        "spread": False,
+                    }
+                ]
+            },
+            {
+                "title": "分组管理",
+                "icon": "&#xe647;",
+                "spread": False,
+                "children": [
+                    {
+                        "title": "分组列表",
+                        "href": f"{url_for('demo.friend-links+links_list')}",
+                        "spread": False
+                    },
+                    {
+                        "title": "添加分组",
+                        "href": f"{url_for('demo.friend-links+links_add')}",
+                        "spread": False,
+                    }
+                ]
+            },
+            {
+                "title": "友情链接",
+                "icon": "&#xe64c;",
+                "href": f"",
+                "spread": False,
+                "children": [
+                    {
+                        "title": "链接列表",
+                        "href": f"{url_for('demo.friend-links+links_list')}",
+                        "spread": False
+                    },
+                    {
+                        "title": "添加链接",
+                        "href": f"{url_for('demo.friend-links+links_add')}",
+                        "spread": False,
+                    }
+                ]
+            }, {
+                "title": "系统基本参数",
+                "icon": "&#xe631;",
+                "href": f"{url_for('cms.system+info')}",
+                "spread": False
+            },
+        ]
+    else:
+        res = [
+            {
+                "title": "后台首页",
+                "icon": "icon-computer",
+                "href": f"{url_for('demo.main_page')}",
+                "spread": False
+            },
+            {
+                "title": "友情链接",
+                "icon": "&#xe64c;",
+                "href": f"",
+                "spread": False,
+                "children": [
+                    {
+                        "title": "链接列表",
+                        "href": f"{url_for('demo.friend-links+links_list')}",
+                        "spread": False
+                    },
+                    {
+                        "title": "添加链接",
+                        "href": f"{url_for('demo.friend-links+links_add')}",
+                        "spread": False,
+                    }
+                ]
+            }, {
+                "title": "系统基本参数",
+                "icon": "&#xe631;",
+                "href": f"{url_for('cms.system+info')}",
+                "spread": False
+            },
+        ]
     return jsonify(res)
 
 

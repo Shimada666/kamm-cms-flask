@@ -110,7 +110,7 @@ layui.config({
     if (window.sessionStorage.getItem('userFace')) {
         $("#userFace").attr("src", window.sessionStorage.getItem('userFace'));
     } else {
-        $("#userFace").attr("src", "../../images/face.jpg");
+        $("#userFace").attr("src", "../../images/avatar.png");
     }
 
     //提交个人资料

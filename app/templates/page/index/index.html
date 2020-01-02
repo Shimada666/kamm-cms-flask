@@ -44,7 +44,7 @@
                         <li class="layui-nav-item" pc>
                             {% if current_user.is_authenticated %}
                                 <a href="javascript:;">
-                                    <img src="/static/images/face.jpg" class="layui-circle" width="35" height="35">
+                                    <img src="/static/images/avatar.png" class="layui-circle" width="35" height="35">
                                     <cite>{{ current_user.username }}</cite>
                                 </a>
                             {% else %}
@@ -83,7 +83,7 @@
             <div class="layui-side layui-bg-black">
                 <div class="user-photo">
                     {% if current_user.is_authenticated %}
-                        <a class="img" title="我的头像"><img src="/static/images/face.jpg"></a>
+                        <a class="img" title="我的头像"><img src="/static/images/avatar.png"></a>
                         <p>你好！<span class="userName"> {{ current_user.username }} </span></p>
                     {% else %}
                         <a class="img" title="我的头像"><img src="/static/images/none.png"></a>
