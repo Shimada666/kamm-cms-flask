@@ -27,6 +27,11 @@ class WebException(HTTPException):
         super(WebException, self).__init__(msg, None)
 
 
+class WebAuthFailed(WebException):
+    code = 403
+    msg = '您的权限不足！'
+
+
 class APIException(HTTPException):
     code = 500
     msg = '抱歉，服务器未知错误'

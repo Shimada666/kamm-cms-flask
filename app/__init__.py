@@ -20,6 +20,8 @@ from app.models.user import User
 from app.extensions import login_manager, db, csrf, migrate
 from app.exceptions.base import APIException, HTTPException, UnknownException, WebException
 
+from app.libs.utils import ep_meta, route_meta_infos
+
 
 def create_app(environment='development'):
     app = Flask(__name__, static_url_path='/', static_folder='templates')
@@ -35,9 +37,6 @@ def create_app(environment='development'):
         app.config.from_object('app.config.secure.DevelopmentSecure')
     app.config.from_object('app.config.log')
 
-    from app.libs.utils import UrlManager
-    app.add_template_global(UrlManager.build_static_url, 'buildStaticUrl')
-    app.add_template_global(UrlManager.build_url, 'buildUrl')
     from app.libs.Helper import Helper
     app.add_template_global(Helper)
 
@@ -47,7 +46,16 @@ def create_app(environment='development'):
     register_blueprints(app)
     register_errors(app)
 
+    mount_router(app)
+
     return app
+
+
+def mount_router(app):
+    for ep, func in app.view_functions.items():
+        info = route_meta_infos.get(func.__name__ + str(func.__hash__()), None)
+        if info:
+            ep_meta.setdefault(ep, info)
 
 
 # def register_logging(app):
