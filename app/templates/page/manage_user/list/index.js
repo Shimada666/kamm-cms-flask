@@ -11,10 +11,10 @@ layui.use(['form', 'layer'], function () {
             success: function (res, status) {
                 if (res.error_code === 0) {
                     var $checkedLinks = $('.users-list tbody tr');
-                    for (var i=0; i<$checkedLinks.length; i++) {
+                    for (var i = 0; i < $checkedLinks.length; i++) {
                         var $currentItem = $($checkedLinks[i])
                         for (var j in users) {
-                            if ($currentItem.attr('data-id') === users[j].toString()){
+                            if ($currentItem.attr('data-id') === users[j].toString()) {
                                 $currentItem.remove();
                                 break;
                             }

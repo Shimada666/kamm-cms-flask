@@ -13,7 +13,7 @@ layui.define(["form", "element", "jquery"], function (exports) {
             }
         };
 
-    function refreshCurrentTab(){
+    function refreshCurrentTab() {
         $(".childFrame .layui-tab-item.layui-show").find("iframe")[0].contentWindow.location.reload(true);
     }
 
@@ -216,12 +216,12 @@ layui.define(["form", "element", "jquery"], function (exports) {
         }).resize();
     }
 
-    $("body").on("click", ".top_tab li", function () {
+    $('body').on("click", ".top_tab li", function () {
         //切换后获取当前窗口的内容
         var curmenu = '';
         var menu = JSON.parse(window.sessionStorage.getItem("menu"));
         curmenu = menu[$(this).index() - 1];
-        if ($(this).index() == 0) {
+        if ($(this).index() === 0) {
             window.sessionStorage.setItem("curmenu", '');
         } else {
             window.sessionStorage.setItem("curmenu", JSON.stringify(curmenu));
@@ -232,10 +232,12 @@ layui.define(["form", "element", "jquery"], function (exports) {
                 } else {
                     window.sessionStorage.setItem("curmenu", JSON.stringify(menu[liIndex - 1]));
                 }
+            } else {
+                refreshCurrentTab();
             }
         }
         element.tabChange(tabFilter, $(this).attr("lay-id")).init();
-        refreshCurrentTab()
+        // refreshCurrentTab()
         // new Tab().tabMove();
     })
 
@@ -263,7 +265,7 @@ layui.define(["form", "element", "jquery"], function (exports) {
         window.sessionStorage.setItem("menu", JSON.stringify(menu));
         element.tabDelete("bodyTab", $(this).parent("li").attr("lay-id")).init();
         new Tab().tabMove();
-    })
+    });
 
     var bodyTab = new Tab();
     exports("bodyTab", function (option) {
