@@ -84,3 +84,28 @@ def is_user_allowed(group_id):
     # 根据 endpoint 查找 authority
     meta = ep_meta.get(ep)
     return verity_user_in_group(group_id, meta.auth, meta.module)
+
+
+def find_auth_module(auth):
+    """ 通过权限寻找meta信息"""
+    for _, meta in ep_meta.items():
+        if meta.auth == auth:
+            return meta
+    return None
+
+
+def get_ep_infos():
+    """ 返回权限管理中的所有视图函数的信息，包含它所属module """
+    infos = {}
+    for ep, meta in ep_meta.items():
+        mod = infos.get(meta.module, None)
+        if mod:
+            sub = mod.get(meta.auth, None)
+            if sub:
+                sub.append(ep)
+            else:
+                mod[meta.auth] = [ep]
+        else:
+            infos.setdefault(meta.module, {meta.auth: [ep]})
+
+    return infos

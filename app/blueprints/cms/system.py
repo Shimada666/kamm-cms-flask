@@ -54,12 +54,12 @@ def navs():
                 "children": [
                     {
                         "title": "分组列表",
-                        "href": f"{url_for('demo.friend-links+links_list')}",
+                        "href": f"{url_for('cms.auth+get_groups')}",
                         "spread": False
                     },
                     {
                         "title": "添加分组",
-                        "href": f"{url_for('demo.friend-links+links_add')}",
+                        "href": f"{url_for('cms.auth+create_group')}",
                         "spread": False,
                     }
                 ]

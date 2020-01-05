@@ -226,13 +226,6 @@ layui.use(['form', 'layer'], function () {
     var $ = layui.jquery,
         form = layui.form(),
         layer = layui.layer;
-    form.on('checkbox(allChoose)', function (data) {
-        var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
-        child.each(function (index, item) {
-            item.checked = data.elem.checked;
-        });
-        form.render('checkbox');
-    });
     $('.links-edit').click(function () {
         layer.msg('敬请期待...');
     })

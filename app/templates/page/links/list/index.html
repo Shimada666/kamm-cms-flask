@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="childrenBody">
-	<blockquote class="layui-elem-quote news_search">
+	<blockquote class="layui-elem-quote search">
 		<div class="layui-inline">
 		    <div class="layui-input-inline">
 		    	<input type="text" value="" placeholder="请输入关键字" class="layui-input search_input">
@@ -34,7 +34,7 @@
 		    <thead>
 				<tr>
 {#					<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>#}
-                    <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
+                    <th><input type="checkbox" name="" class="all-choose" lay-skin="primary" lay-filter="all-choose"></th>
 					<th>网站名称</th>
 					<th>网站地址</th>
 					<th>站长邮箱</th>
@@ -71,7 +71,4 @@
 {% endblock %}
 {% block js %}
     {{ super() }}
-{#    <script>#}
-{#        var csrf_token = "{{ csrf_token() }}"#}
-{#    </script>#}
 {% endblock %}

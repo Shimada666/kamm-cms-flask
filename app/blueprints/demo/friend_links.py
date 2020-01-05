@@ -29,7 +29,7 @@ def links_add():
         db.session.add(f)
         db.session.commit()
         flash('添加成功！')
-    return common_render('page/links/add/index.html')
+    return common_render('page/links/create/index.html')
 
 
 @friend_links_rp.route('/delete', methods=['POST'])

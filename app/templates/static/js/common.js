@@ -55,6 +55,11 @@ layui.use(['form', 'layer', 'jquery', 'upload', 'laydate'], function () {
         });
         form.render('checkbox');
     });
-
+    form.on("checkbox(choose)",function(data){
+		var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]:not([name="show"])');
+		var childChecked = $(data.elem).parents('table').find('tbody input[type="checkbox"]:not([name="show"]):checked')
+		$(data.elem).parents('table').find('thead input.all-choose').get(0).checked = childChecked.length === child.length;
+		form.render('checkbox');
+	})
 
 })

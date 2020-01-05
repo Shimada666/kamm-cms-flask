@@ -2,7 +2,8 @@ from flask_wtf import FlaskForm
 from flask import request, flash
 from app.exceptions.base import ParameterException
 from app.libs.utils import common_render
-from wtforms import StringField, SubmitField, TextAreaField, PasswordField, BooleanField, RadioField, IntegerField
+from wtforms import StringField, SubmitField, TextAreaField, PasswordField, BooleanField, RadioField, IntegerField, \
+    FieldList
 from wtforms.validators import DataRequired, Email, length, Optional, URL, EqualTo, Regexp, NumberRange
 from app.models.user import Group
 from app.exceptions.base import WebNotFound
@@ -65,6 +66,18 @@ class RegisterForm(Form):
     #     exists = Group.query.filter_by(id=value).first()
     #     if not exists:
     #         raise WebNotFound(msg='分组不存在')
+
+
+# 管理员创建分组
+class NewGroup(Form):
+    # 分组name
+    name = StringField(validators=[DataRequired(message='请输入分组名称')])
+    # 非必须
+    info = StringField(validators=[Optional()])
+    # 必填，分组的权限
+    auths = FieldList(StringField(validators=[DataRequired(message='未勾选权限')]),
+                      validators=[DataRequired(message='请输入auths字段')])
+    submit = SubmitField()
 
 
 class UserInfoForm(Form):
