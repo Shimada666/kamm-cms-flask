@@ -107,9 +107,9 @@
 // 	})
 //
 // 	//批量删除
-// 	$(".links-del").click(function(){
-// 		var $checkbox = $('.links-list tbody input[type="checkbox"][name="checked"]');
-// 		var $checked = $('.links-list tbody input[type="checkbox"][name="checked"]:checked');
+// 	$(".dels").click(function(){
+// 		var $checkbox = $('.items-list tbody input[type="checkbox"][name="checked"]');
+// 		var $checked = $('.items-list tbody input[type="checkbox"][name="checked"]:checked');
 // 		if($checkbox.is(":checked")){
 // 			layer.confirm('确定删除选中的信息？',{icon:3, title:'提示信息'},function(index){
 // 				var index = layer.msg('删除中，请稍候',{icon: 16,time:false,shade:0.8});
@@ -117,13 +117,13 @@
 // 	            	//删除数据
 // 	            	for(var j=0;j<$checked.length;j++){
 // 	            		for(var i=0;i<linksData.length;i++){
-// 							if(linksData[i].linksId == $checked.eq(j).parents("tr").find(".link-del").attr("data-id")){
+// 							if(linksData[i].linksId == $checked.eq(j).parents("tr").find(".del").attr("data-id")){
 // 								linksData.splice(i,1);
 // 								linksList(linksData);
 // 							}
 // 						}
 // 	            	}
-// 	            	$('.links-list thead input[type="checkbox"]').prop("checked",false);
+// 	            	$('.items-list thead input[type="checkbox"]').prop("checked",false);
 // 	            	form.render();
 // 	                layer.close(index);
 // 					layer.msg("删除成功");
@@ -161,7 +161,7 @@
 // 		layer.alert('您点击了友情链接编辑按钮，由于是纯静态页面，所以暂时不存在编辑内容，后期会添加，敬请谅解。。。',{icon:6, title:'友链编辑'});
 // 	})
 //
-// 	$("body").on("click",".link-del",function(){  //删除
+// 	$("body").on("click",".del",function(){  //删除
 // 		var _this = $(this);
 // 		layer.confirm('确定删除此信息？',{icon:3, title:'提示信息'},function(index){
 // 			//_this.parents("tr").remove();
@@ -196,7 +196,7 @@
 // 			    	+'<td>'+currData[i].showAddress+'</td>'
 // 			    	+'<td>'
 // 					+  '<a class="layui-btn layui-btn-mini links_edit"><i class="iconfont icon-edit"></i> 编辑</a>'
-// 					+  '<a class="layui-btn layui-btn-danger layui-btn-mini link-del" data-id="'+data[i].linksId+'"><i class="layui-icon">&#xe640;</i> 删除</a>'
+// 					+  '<a class="layui-btn layui-btn-danger layui-btn-mini del" data-id="'+data[i].linksId+'"><i class="layui-icon">&#xe640;</i> 删除</a>'
 // 			        +'</td>'
 // 			    	+'</tr>';
 // 				}
@@ -216,7 +216,7 @@
 // 			pages : Math.ceil(linksData.length/nums),
 // 			jump : function(obj){
 // 				$(".links_content").html(renderDate(linksData,obj.curr));
-// 				$('.links-list thead input[type="checkbox"]').prop("checked",false);
+// 				$('.items-list thead input[type="checkbox"]').prop("checked",false);
 // 		    	form.render();
 // 			}
 // 		})
@@ -232,50 +232,5 @@ layui.use(['form', 'layer'], function () {
 
     $(".search-btn").click(function(){
         layer.msg('敬请期待...');
-    })
-    function deleteLinks(links) {
-        $.ajax({
-            url: "/demo/friend-links/delete",
-            method: "post",
-            data: JSON.stringify({links}),
-            success: function (res, status) {
-                if (res.error_code === 0) {
-                    var $checkedLinks = $('.links-list tbody tr');
-                    for (var i=0; i<$checkedLinks.length; i++) {
-                        var $currentLink = $($checkedLinks[i])
-                        for (var j in links) {
-                            if ($currentLink.attr('data-id') === links[j].toString()){
-                                $currentLink.remove();
-                                break;
-                            }
-                        }
-                    }
-                    layer.msg('删除成功!', {icon: 1})
-                }
-            }
-        })
-        return false
-    }
-
-    $(".link-del").click(function () {
-        var $this = $(this);
-        var ids = [parseInt($this.attr("data-id"))];
-        deleteLinks(ids)
-    })
-    $(".links-del").click(function () {
-        var $checkbox = $('.links-list tbody input[type="checkbox"][name="checked"]');
-        var $checked = $('.links-list tbody input[type="checkbox"][name="checked"]:checked');
-        if ($checkbox.is(":checked")) {
-            layer.confirm('确定删除选中的信息？', {icon: 3, title: '提示信息'}, function () {
-                var ids = []
-                for (var i = 0; i < $checked.length; i++) {
-                    var id = $checked.eq(i).parents("tr").find(".link-del").attr("data-id")
-                    ids.push(id)
-                }
-                deleteLinks(ids)
-            })
-        } else {
-            layer.msg("请选择需要删除的链接");
-        }
     })
 });

@@ -34,7 +34,7 @@ def links_add():
 
 @friend_links_rp.route('/delete', methods=['POST'])
 def delete():
-    links = request.json['links']
+    links = request.json['items']
     for link_id in links:
         link = FriendLinks.query.get(link_id)
         if link is None:

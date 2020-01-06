@@ -43,9 +43,7 @@ layui.use(['form', 'layer', 'jquery', 'upload', 'laydate'], function () {
                 console.log('返回数据不为json类型!')
             }
         },
-        statusCode: {
-
-        }
+        statusCode: {}
     });
 
     form.on('checkbox(all-choose)', function (data) {
@@ -55,11 +53,59 @@ layui.use(['form', 'layer', 'jquery', 'upload', 'laydate'], function () {
         });
         form.render('checkbox');
     });
-    form.on("checkbox(choose)",function(data){
-		var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]:not([name="show"])');
-		var childChecked = $(data.elem).parents('table').find('tbody input[type="checkbox"]:not([name="show"]):checked')
+    form.on("checkbox(choose)", function (data) {
+        var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]:not([name="show"])');
+        var childChecked = $(data.elem).parents('table').find('tbody input[type="checkbox"]:not([name="show"]):checked')
         $(data.elem).parents('table').find('thead input[lay-filter="all-choose"]').get(0).checked = childChecked.length === child.length;
         form.render('checkbox');
-	})
+    })
 
+    // 表格单项删除及批量删除
+    function deleteItems(items, url) {
+        $.ajax({
+            url: url,
+            method: "post",
+            data: JSON.stringify({items}),
+            success: function (res, status) {
+                if (res.error_code === 0) {
+                    var $checkedLinks = $('.items-list tbody tr');
+                    for (var i = 0; i < $checkedLinks.length; i++) {
+                        var $currentItem = $($checkedLinks[i])
+                        for (var j in items) {
+                            if ($currentItem.attr('data-id') === items[j].toString()) {
+                                $currentItem.remove();
+                                break;
+                            }
+                        }
+                    }
+                    layer.msg('删除成功!', {icon: 1})
+                }
+            }
+        })
+        return false
+    }
+
+    $(".del").click(function () {
+        var $this = $(this);
+        var ids = [parseInt($this.attr("data-id"))];
+        var deleteUrl = $("#delete-url").text()
+        deleteItems(ids, deleteUrl)
+    })
+    $(".dels").click(function () {
+        var $checkbox = $('.items-list tbody input[type="checkbox"][name="checked"]');
+        var $checked = $('.items-list tbody input[type="checkbox"][name="checked"]:checked');
+        var deleteUrl = $("#delete-url").text()
+        if ($checkbox.is(":checked")) {
+            layer.confirm('确定删除选中的信息？', {icon: 3, title: '提示信息'}, function () {
+                var ids = []
+                for (var i = 0; i < $checked.length; i++) {
+                    var id = $checked.eq(i).parents("tr").find(".del").attr("data-id")
+                    ids.push(id)
+                }
+                deleteItems(ids, deleteUrl)
+            })
+        } else {
+            layer.msg("请选择需要删除的选项");
+        }
+    })
 })

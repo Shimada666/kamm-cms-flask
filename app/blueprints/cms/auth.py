@@ -47,7 +47,7 @@ def get_users():
 
 @auth_rp.route('/user/delete', methods=['POST'])
 def delete_user():
-    users = request.json['users']
+    users = request.json['items']
     for user_id in users:
         user = User.query.get(user_id)
         if user is None:
@@ -92,7 +92,7 @@ def get_groups():
 
 @auth_rp.route('/group/delete', methods=['POST'])
 def delete_group():
-    groups = request.json['groups']
+    groups = request.json['items']
     for group_id in groups:
         group = Group.query.get(group_id)
         if group is None:

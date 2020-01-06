@@ -2,6 +2,7 @@
 
 {% block body %}
     <div class="childrenBody">
+        <span id="delete-url" style="display: none">/cms/auth/group/delete</span>
         <blockquote class="layui-elem-quote news_search">
             <form class="layui-form" action="{{ url_for('cms.auth+get_users') }}">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
@@ -30,14 +31,14 @@
 {#                    <a class="title">分组列表信息</a>#}
 {#                </div>#}
                 <div class="layui-inline">
-                    <a class="layui-btn layui-btn-danger users-del">批量删除</a>
+                    <a class="layui-btn layui-btn-danger dels">批量删除</a>
                 </div>
                 <div class="layui-inline">
                     <div class="layui-form-mid layui-word-aux"></div>
                 </div>
             </form>
         </blockquote>
-        <div class="layui-form users-list">
+        <div class="layui-form items-list">
             <table class="layui-table">
                 <colgroup>
                     <col width="50">
@@ -62,8 +63,8 @@
                         <td>{{ group.name }}</td>
                         <td>{{ group.info }}</td>
                         <td>
-                            <a class="layui-btn layui-btn-mini links-edit"><i class="iconfont icon-edit"></i> 编辑</a>
-                            <a class="layui-btn layui-btn-danger layui-btn-mini user-del" data-id="{{ group.id }}"><i
+                            <a class="layui-btn layui-btn-mini"><i class="iconfont icon-edit"></i> 编辑</a>
+                            <a class="layui-btn layui-btn-danger layui-btn-mini del"  data-id="{{ group.id }}"><i
                                     class="layui-icon">&#xe640;</i>删除</a>
                         </td>
                     </tr>
