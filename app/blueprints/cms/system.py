@@ -7,7 +7,7 @@
 """
 
 from app.libs.redprints import Redprint
-from app.libs.utils import redirect_back, common_render
+from app.libs.utils import redirect_back_url, common_render
 from app.validtors.forms import LoginForm, ResetPasswordForm
 from app.models.user import User
 from app.extensions import db

@@ -6,7 +6,7 @@
     :license: MIT, see LICENSE for more details.
 """
 from app.libs.redprints import Redprint
-from app.libs.utils import redirect_back, common_render, get_ep_infos, find_auth_module
+from app.libs.utils import redirect_back_url, common_render, get_ep_infos, find_auth_module
 from app.libs.decorators import admin_required
 from app.validtors.forms import RegisterForm, NewGroup
 from app.extensions import db
@@ -20,6 +20,7 @@ auth_rp = Redprint('auth')
 @auth_rp.route('/user/create', methods=['GET', 'POST'])
 @admin_required
 def create_user():
+    groups = Group.query.all()
     if request.method == 'POST':
         form = RegisterForm()
         if form.validate_on_submit():
@@ -34,7 +35,7 @@ def create_user():
             flash('添加成功!', 1)
         else:
             flash(form.errors_info)
-    return common_render('page/manage_user/create/index.html')
+    return common_render('page/manage_user/create/index.html', groups=groups)
 
 
 @auth_rp.route('/users')

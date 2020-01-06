@@ -5,7 +5,7 @@
     :license: MIT, see LICENSE for more details.
 """
 LOG = {
-    'LEVEL': 'DEBUG',
+    'LEVEL': 'INFO',
     'DIR': 'logs',
     'SIZE_LIMIT': 1024 * 1024 * 5,
     'REQUEST_LOG': True,

@@ -1,5 +1,5 @@
 from app.libs.redprints import Redprint
-from app.libs.utils import redirect_back, common_render
+from app.libs.utils import redirect_back_url, common_render
 from app.validtors.forms import LoginForm, ResetPasswordForm, UserInfoForm
 from app.models.user import User
 from app.extensions import db
@@ -8,12 +8,6 @@ from flask import request, render_template, redirect, url_for, flash, jsonify, g
 from flask_login import current_user, login_user, logout_user, login_required
 
 user_rp = Redprint('user')
-
-
-@user_rp.route('/register', methods=['GET', 'POST'])
-def register():
-    # TODO..
-    pass
 
 
 @user_rp.route('/login', methods=['GET', 'POST'])

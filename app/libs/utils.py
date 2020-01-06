@@ -23,13 +23,13 @@ def is_safe_url(target):
            ref_url.netloc == test_url.netloc
 
 
-def redirect_back(default='home.index', **kwargs):
+def redirect_back_url(default='home.index', **kwargs):
     for target in request.args.get('next'), request.referrer:
         if not target:
             continue
         if is_safe_url(target):
-            return redirect(target)
-    return redirect(url_for(default, **kwargs))
+            return target
+    return url_for(default, **kwargs)
 
 
 # 统一渲染方法

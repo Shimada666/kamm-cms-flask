@@ -1,4 +1,4 @@
-layui.use(['form', 'layer', 'jquery', 'upload', 'laydate'], function () {
+layui.use(['form', 'layer', 'jquery'], function () {
     var $ = layui.jquery,
         form = layui.form(),
         layer = layui.layer;

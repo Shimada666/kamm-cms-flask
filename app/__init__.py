@@ -10,8 +10,10 @@ import os
 from logging.handlers import SMTPHandler, RotatingFileHandler
 
 import click
-from flask import Flask, render_template, request, url_for
-from app.libs.utils import common_render
+import time
+import json
+from flask import Flask, render_template, request, url_for, g
+from app.libs.utils import common_render, redirect_back_url
 from app.models.user import User
 # from flask_login import current_user
 # from flask_sqlalchemy import get_debug_queries
@@ -46,6 +48,9 @@ def create_app(environment='development'):
     register_blueprints(app)
     register_errors(app)
 
+    register_before_request(app)
+    register_after_request(app)
+
     mount_router(app)
 
     return app
@@ -57,7 +62,39 @@ def mount_router(app):
         if info:
             ep_meta.setdefault(ep, info)
 
+def register_before_request(app):
+    @app.before_request
+    def request_cost_time():
+        g.request_start_time = time.time()
+        g.request_time = lambda: "%.5f" % (time.time() - g.request_start_time)
 
+
+def register_after_request(app):
+    @app.after_request
+    def log_response(resp):
+        log_config = app.config.get('LOG')
+        if not log_config['REQUEST_LOG']:
+            return resp
+        message = '[%s] -> [%s] from:%s costs:%.3f ms' % (
+            request.method,
+            request.path,
+            request.remote_addr,
+            float(g.request_time()) * 1000
+        )
+        if log_config['LEVEL'] == 'INFO':
+            app.logger.info(message)
+        elif log_config['LEVEL'] == 'DEBUG':
+            req_body = '{}'
+            try:
+                req_body = request.get_json() if request.get_json() else {}
+            except:
+                pass
+            message += " data:{\n\tparam: %s, \n\tbody: %s\n} " % (
+                json.dumps(request.args, ensure_ascii=False),
+                req_body
+            )
+            app.logger.debug(message)
+        return resp
 # def register_logging(app):
 #     class RequestFormatter(logging.Formatter):
 #
@@ -119,18 +156,18 @@ def register_shell_context(app: Flask):
 def register_errors(app):
     @app.errorhandler(404)
     def page_not_found(e):
-        return common_render('page/error/index.html', msg='页面不存在！', code=e.code), 404
+        return common_render('page/error/index.html', msg='页面不存在！', code=e.code, url=redirect_back_url()), 404
 
     @app.errorhandler(Exception)
     def handler(e):
         if isinstance(e, WebException):
-            return common_render('page/error/index.html', msg=e.msg, code=e.code), e.code
+            return common_render('page/error/index.html', msg=e.msg, code=e.code, url=redirect_back_url()), e.code
         if isinstance(e, APIException):
             return e
         if isinstance(e, HTTPException):
             e.code = e.code
             e.msg = e.description
-            return common_render('page/error/index.html', msg=e.msg, code=e.code), e.code
+            return common_render('page/error/index.html', msg=e.msg, code=e.code, url=redirect_back_url()), e.code
             # error_code = 20000
             # return APIException(msg, code, error_code)
         else:
@@ -140,20 +177,6 @@ def register_errors(app):
                 return UnknownException()
             else:
                 raise e
-
-    #
-    #     @app.errorhandler(400)
-    #     def bad_request(e):
-    #         return render_template('errors/400.html'), 400
-
-
-#     @app.errorhandler(500)
-#     def internal_server_error(e):
-#         return render_template('errors/500.html'), 500
-#
-#     @app.errorhandler(CSRFError)
-#     def handle_csrf_error(e):
-#         return render_template('errors/400.html', description=e.description), 400
 
 
 def register_commands(app):
