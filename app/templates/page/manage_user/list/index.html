@@ -82,7 +82,7 @@
 {% endblock %}
 {% block tab %}
     <div id="tab1" style="display: none">
-        {{ edit_user.render(groups) }}
+        {{ edit_user.render(groups,can_update_username=False,endpoint='cms.auth+update_user') }}
     </div>
 {% endblock %}
 {% block macrojs %}

@@ -46,14 +46,13 @@ class ResetPasswordForm(Form):
 
 # 注册校验
 class RegisterForm(Form):
+    username = StringField(validators=[DataRequired(message='用户名不可为空'),
+                                       length(min=2, max=10, message='用户名长度必须在2~10之间')])
     password = PasswordField('密码', validators=[
         DataRequired(message='密码不可为空'),
         Regexp(r'^[A-Za-z0-9_*&$#@]{6,22}$', message='密码长度必须在6~22位之间，包含字符、数字和 _ '),
         EqualTo('confirm_password', message='两次输入的密码不一致，请输入相同的密码')])
     confirm_password = PasswordField('confirm_password', validators=[DataRequired(message='请确认密码')])
-    username = StringField(validators=[DataRequired(message='用户名不可为空'),
-                                       length(min=2, max=10, message='用户名长度必须在2~10之间')])
-
     group_id = IntegerField('分组id',
                             validators=[DataRequired(message='请填写用户分组'), NumberRange(message='分组id必须大于0', min=1)])
     email = StringField('电子邮箱', validators=[

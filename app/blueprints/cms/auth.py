@@ -28,7 +28,7 @@ def create_user():
             if exists:
                 flash('该用户已被使用，请输入其他的用户名！', 2)
                 return common_render('page/manage_user/create/index.html')
-            new_user = User(username=form.username.data, email=form.email.data)
+            new_user = User(username=form.username.data, email=form.email.data, group_id=form.group_id.data)
             new_user.set_password(form.password.data)
             db.session.add(new_user)
             db.session.commit()
@@ -36,6 +36,22 @@ def create_user():
         else:
             flash(form.errors_info)
     return common_render('page/manage_user/create/index.html', groups=groups)
+
+
+@auth_rp.route('/user/update', methods=['POST'])
+@admin_required
+def update_user():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        user.email = form.email.data
+        user.group_id = form.group_id.data
+        user.set_password(form.password.data)
+        db.session.commit()
+        flash('更新成功!', 1)
+    else:
+        flash(form.errors_info)
+    return redirect(url_for('cms.auth+get_users'))
 
 
 @auth_rp.route('/users')

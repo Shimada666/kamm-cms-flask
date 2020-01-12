@@ -29,7 +29,7 @@
 {#主要的JS#}
 {% block js %}
     <script type="text/javascript" src="{{ url_for('static', filename='static/layui/layui.js') }}"></script>
-{#    <script type="text/javascript" src="{{ url_for('static', filename='static/js/common.js') }}"></script>#}
+    <script type="text/javascript" src="{{ url_for('static', filename='static/js/common.js') }}"></script>
     {{ Helper.get_script(path)|safe }}
     <script>
         var csrf_token = "{{ csrf_token() }}";

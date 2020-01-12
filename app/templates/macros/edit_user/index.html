@@ -1,10 +1,15 @@
-{% macro render(groups,endpoint=None) %}
+{% macro render(groups,can_update_username=True,endpoint=None) %}
     <form class="layui-form" style="width:90%;" {% if endpoint %} action="{{ url_for(endpoint) }}" {% endif %}
           method="post">
         <div class="layui-form-item">
             <label class="layui-form-label">用户名</label>
             <div class="layui-input-block">
-                <input type="text" name="username" class="layui-input" lay-verify="required" placeholder="请输入用户名称">
+                {% if can_update_username %}
+                    <input type="text" name="username" class="layui-input" lay-verify="required" placeholder="请输入用户名称">
+                {% else %}
+                    <input type="text" name="username" class="layui-input layui-disabled" lay-verify="required" placeholder="请输入用户名称"
+                       readonly="readonly">
+                {% endif %}
             </div>
         </div>
         <div class="layui-form-item">
@@ -31,7 +36,7 @@
             <label class="layui-form-label">选择分组</label>
             <div class="layui-input-block">
                 <div class="layui-inline">
-                    <select>
+                    <select name="group_id">
                         <option value="">请选择分组</option>
                         {% for group in groups %}
                             <option title="group" value="{{ group.id }}">{{ group.name }}</option>
