@@ -1,4 +1,8 @@
 {% extends 'layout/index.html' %}
+{% import 'macros/edit_user/index.html' as edit_user %}
+{% block macrocss %}
+    {{ Helper.get_style('macros/edit_user/index.less')|safe }}
+{% endblock %}
 
 {% block body %}
     <div class="childrenBody">
@@ -60,11 +64,11 @@
                 {% for user in users %}
                     <tr data-id="{{ user.id }}">
                         <td><input type="checkbox" name="checked" lay-skin="primary" lay-filter="choose"></td>
-                        <td>{{ user.username }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.group.name }}</td>
+                        <td title="username">{{ user.username }}</td>
+                        <td title="email">{{ user.email }}</td>
+                        <td title="group-info" data-id="{{ user.group.id }}">{{ user.group.name }}</td>
                         <td>
-                            <a class="layui-btn layui-btn-mini links-edit"><i class="iconfont icon-edit"></i> 编辑</a>
+                            <a class="layui-btn layui-btn-mini edit"><i class="iconfont icon-edit"></i> 编辑</a>
                             <a class="layui-btn layui-btn-danger layui-btn-mini del" data-id="{{ user.id }}"><i
                                     class="layui-icon">&#xe640;</i>删除</a>
                         </td>
@@ -75,4 +79,12 @@
         </div>
         <div id="page"></div>
     </div>
+{% endblock %}
+{% block tab %}
+    <div id="tab1" style="display: none">
+        {{ edit_user.render(groups) }}
+    </div>
+{% endblock %}
+{% block macrojs %}
+    {{ Helper.get_script('macros/edit_user/index.js')|safe }}
 {% endblock %}

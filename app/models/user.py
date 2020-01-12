@@ -21,7 +21,7 @@ class Group(db.Model):
     info = db.Column(db.String(255), comment='权限组描述')
 
     users = db.relationship('User', backref='group')
-    auths = db.relationship('Auth', backref='group')
+    auths = db.relationship('Auth', backref='group', cascade='all')
 
 
 class User(db.Model, UserMixin):

@@ -233,7 +233,7 @@ layui.define(["form", "element", "jquery"], function (exports) {
                     window.sessionStorage.setItem("curmenu", JSON.stringify(menu[liIndex - 1]));
                 }
             } else {
-                refreshCurrentTab();
+                // refreshCurrentTab();
             }
         }
         element.tabChange(tabFilter, $(this).attr("lay-id")).init();

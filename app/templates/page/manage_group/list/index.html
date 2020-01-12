@@ -1,4 +1,9 @@
 {% extends 'layout/index.html' %}
+{% import 'macros/edit_group/index.html' as edit_gruop %}
+
+{% block macrocss %}
+    {{ Helper.get_style('macros/edit_group/index.less')|safe }}
+{% endblock %}
 
 {% block body %}
     <div class="childrenBody">
@@ -6,30 +11,30 @@
         <blockquote class="layui-elem-quote news_search">
             <form class="layui-form" action="{{ url_for('cms.auth+get_users') }}">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-{#                <div class="layui-inline">#}
-{#                    <select name="group_id" lay-verify="required">#}
-{#                        <option value="">请选择分组</option>#}
-{#                        {% for group in groups %}#}
-{#                            <option value="{{ group.id }}">{{ group.name }}</option>#}
-{#                        {% endfor %}#}
-{#                    </select>#}
-{#                    <div class="layui-unselect layui-form-select">#}
-{#                        <div class="layui-select-title">#}
-{#                            <input type="text" placeholder="请选择分组" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i>#}
-{#                        </div>#}
-{#                        <dl class="layui-anim layui-anim-upbit">#}
-{#                            {% for group in groups %}#}
-{#                                <dd lay-value="{{ group.id }}" class="">{{ group.name }}</dd>#}
-{#                            {% endfor %}#}
-{#                        </dl>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="layui-inline">#}
-{#                    <button class="layui-btn search-btn">查询</button>#}
-{#                </div>#}
-{#                <div class="layui-inline">#}
-{#                    <a class="title">分组列表信息</a>#}
-{#                </div>#}
+                {#                <div class="layui-inline">#}
+                {#                    <select name="group_id" lay-verify="required">#}
+                {#                        <option value="">请选择分组</option>#}
+                {#                        {% for group in groups %}#}
+                {#                            <option value="{{ group.id }}">{{ group.name }}</option>#}
+                {#                        {% endfor %}#}
+                {#                    </select>#}
+                {#                    <div class="layui-unselect layui-form-select">#}
+                {#                        <div class="layui-select-title">#}
+                {#                            <input type="text" placeholder="请选择分组" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i>#}
+                {#                        </div>#}
+                {#                        <dl class="layui-anim layui-anim-upbit">#}
+                {#                            {% for group in groups %}#}
+                {#                                <dd lay-value="{{ group.id }}" class="">{{ group.name }}</dd>#}
+                {#                            {% endfor %}#}
+                {#                        </dl>#}
+                {#                    </div>#}
+                {#                </div>#}
+                {#                <div class="layui-inline">#}
+                {#                    <button class="layui-btn search-btn">查询</button>#}
+                {#                </div>#}
+                {#                <div class="layui-inline">#}
+                {#                    <a class="title">分组列表信息</a>#}
+                {#                </div>#}
                 <div class="layui-inline">
                     <a class="layui-btn layui-btn-danger dels">批量删除</a>
                 </div>
@@ -42,29 +47,30 @@
             <table class="layui-table">
                 <colgroup>
                     <col width="50">
-                    <col width="40%">
+                    <col width="20%">
+                    <col width="30%">
                     <col>
                     <col width="15%">
                 </colgroup>
                 <thead>
                 <tr>
-                    {#					<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>#}
                     <th><input type="checkbox" name="" lay-skin="primary" lay-filter="all-choose"></th>
                     <th>分组名称</th>
-                    <th>信息</th>
+                    <th>分组描述</th>
+                    <th>权限</th>
                     <th>操作</th>
                 </tr>
                 </thead>
-                {#		    <tbody class="links_content"></tbody>#}
                 <tbody>
                 {% for group in groups %}
                     <tr data-id="{{ group.id }}">
                         <td><input type="checkbox" name="checked" lay-skin="primary" lay-filter="choose"></td>
-                        <td>{{ group.name }}</td>
-                        <td>{{ group.info }}</td>
+                        <td title="group-name">{{ group.name }}</td>
+                        <td title="group-info">{{ group.info }}</td>
+                        <td title="group-auths">{% for auth in group.auths %}{{ auth.auth }} {% endfor %}</td>
                         <td>
-                            <a class="layui-btn layui-btn-mini"><i class="iconfont icon-edit"></i> 编辑</a>
-                            <a class="layui-btn layui-btn-danger layui-btn-mini del"  data-id="{{ group.id }}"><i
+                            <a class="layui-btn layui-btn-mini edit"><i class="iconfont icon-edit"></i> 编辑</a>
+                            <a class="layui-btn layui-btn-danger layui-btn-mini del" data-id="{{ group.id }}"><i
                                     class="layui-icon">&#xe640;</i>删除</a>
                         </td>
                     </tr>
@@ -74,4 +80,14 @@
         </div>
         <div id="page"></div>
     </div>
+{% endblock %}
+
+{% block tab %}
+    <div id="tab1" style="display: none">
+        {{ edit_gruop.render(ep_infos,endpoint='cms.auth+update_group') }}
+    </div>
+{% endblock %}
+
+{% block macrojs %}
+    {{ Helper.get_script('macros/edit_group/index.js')|safe }}
 {% endblock %}

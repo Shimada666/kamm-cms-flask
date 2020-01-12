@@ -225,7 +225,7 @@
 layui.use(['form', 'layer'], function () {
     var $ = layui.jquery,
         form = layui.form(),
-        layer = layui.layer;
+        layer = parent.layer === undefined ? layui.layer : parent.layer;
     $('.links-edit').click(function () {
         layer.msg('敬请期待...');
     })

@@ -27,8 +27,8 @@ class Helper:
     @classmethod
     def _script_in_template(cls, url: str) -> str:
         if current_app.config['DEBUG']:
-            return f'<script type="module" src="{url}.js?v={uuid.uuid4()}"></script>'
-        return f'<script type="module" src="{url}.js"></script>'
+            return f'<script type="text/javascript" src="{url}.js?v={uuid.uuid4()}"></script>'
+        return f'<script type="text/javascript" src="{url}.js"></script>'
 
     @classmethod
     def _get_path(cls, entry):

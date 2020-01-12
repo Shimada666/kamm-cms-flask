@@ -14,11 +14,13 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='static/layui/css/layui.css') }}">
         <link rel="stylesheet/less" type="text/less" href="{{ url_for('static', filename='static/css/common.less') }}">
         {#less IE支持的最高版本3.8.0#}
-{#        <script src="https://cdn.bootcss.com/less.js/3.8.0/less.min.js"></script>#}
+        {#        <script src="https://cdn.bootcss.com/less.js/3.8.0/less.min.js"></script>#}
         {{ Helper.get_style(path)|safe }}
         <link rel="stylesheet" href="//at.alicdn.com/t/font_tnyc012u2rlwstt9.css" media="all"/>
-        <script type="text/javascript" src="{{ url_for('static', filename='static/js/less.min.js') }}"></script>
     {% endblock %}
+    {#宏css#}
+    {% block macrocss %}{% endblock %}
+    <script type="text/javascript" src="{{ url_for('static', filename='static/js/less.min.js') }}"></script>
 </head>
 <body>
 {% block body %}{% endblock %}
@@ -27,12 +29,12 @@
 {#主要的JS#}
 {% block js %}
     <script type="text/javascript" src="{{ url_for('static', filename='static/layui/layui.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='static/js/common.js') }}"></script>
+{#    <script type="text/javascript" src="{{ url_for('static', filename='static/js/common.js') }}"></script>#}
     {{ Helper.get_script(path)|safe }}
     <script>
         var csrf_token = "{{ csrf_token() }}";
         layui.use(['form', 'layer'], function () {
-            const layer = layui.layer;
+            var layer = layui.layer;
             {% for message in get_flashed_messages(with_categories=True) %}
                 {% if message[0] != "message" %}
                     layer.msg("{{ message[1] | safe }}", {icon: "{{ message[0] }}", time: 5000})
@@ -43,7 +45,10 @@
         });
     </script>
 {% endblock %}
+{#宏js#}
+{% block macrojs %}{% endblock %}
 {#次要的js#}
 {% block minorjs %}{% endblock %}
 </body>
+{% block tab %}{% endblock %}
 </html>

@@ -65,7 +65,7 @@ layui.use(['form', 'layer', 'jquery'], function () {
         $.ajax({
             url: url,
             method: "post",
-            data: JSON.stringify({items}),
+            data: JSON.stringify({items: items}),
             success: function (res, status) {
                 if (res.error_code === 0) {
                     var $checkedLinks = $('.items-list tbody tr');
