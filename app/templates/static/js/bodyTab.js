@@ -14,7 +14,9 @@ layui.define(["form", "element", "jquery"], function (exports) {
         };
 
     function refreshCurrentTab() {
-        $(".childFrame .layui-tab-item.layui-show").find("iframe")[0].contentWindow.location.reload(true);
+        var subIframe = $(".childFrame .layui-tab-item.layui-show").find("iframe")[0]
+        subIframe.contentWindow.location.href = subIframe.contentWindow.location.href;
+        subIframe.contentWindow.location.reload;
     }
 
     //获取二级菜单数据
@@ -237,7 +239,7 @@ layui.define(["form", "element", "jquery"], function (exports) {
             }
         }
         element.tabChange(tabFilter, $(this).attr("lay-id")).init();
-        // refreshCurrentTab()
+        refreshCurrentTab()
         // new Tab().tabMove();
     })
 

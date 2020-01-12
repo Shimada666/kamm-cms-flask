@@ -1,17 +1,20 @@
 layui.use(['form', 'layer', 'jquery'], function () {
     var $ = layui.jquery,
         form = layui.form(),
-        layer = layui.layer;
+        layer = parent.layer === undefined ? layui.layer : parent.layer;
     $.ajaxSetup({
         timeout: 4000,
         contentType: "application/json",
         dataType: 'json',
+        layerIndex:-1,
         beforeSend: function (xhr, settings) {
             if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
                 xhr.setRequestHeader('X-CSRFToken', csrf_token);
             }
+            this.layerIndex = layer.msg('操作中，请稍候',{icon: 16,time:false,shade:0.8})
         },
         complete: function (XMLHttpRequest, status) {
+            layer.close(this.layerIndex);
             //通过XMLHttpRequest取得响应结果
             // console.log(status)
             if (status === 'timeout') {
