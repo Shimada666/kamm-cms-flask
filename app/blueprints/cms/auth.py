@@ -133,8 +133,6 @@ def get_groups():
 
 @auth_rp.route('/group/delete', methods=['POST'])
 def delete_group():
-    import time
-    time.sleep(123)
     groups = request.json['items']
     for group_id in groups:
         group = Group.query.get(group_id)

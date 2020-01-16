@@ -2,7 +2,7 @@ layui.use(['form', 'layer', 'jquery'], function () {
     var $ = layui.jquery,
         form = layui.form(),
         layer = parent.layer === undefined ? layui.layer : parent.layer;
-    $.ajaxSetup({
+    var ajaxRequest = $.ajaxSetup({
         timeout: 4000,
         contentType: "application/json",
         dataType: 'json',
@@ -19,6 +19,7 @@ layui.use(['form', 'layer', 'jquery'], function () {
             // console.log(status)
             if (status === 'timeout') {
                 layer.msg('请求超时!')
+                ajaxRequest.abort();
                 return
             }
             var res = XMLHttpRequest.responseText;
