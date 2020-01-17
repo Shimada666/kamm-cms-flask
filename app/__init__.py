@@ -12,12 +12,11 @@ from logging.handlers import SMTPHandler, RotatingFileHandler
 import click
 import time
 import json
-from flask import Flask, render_template, request, url_for, g
+import re
+from flask import Flask, request, url_for, g, redirect, flash
 from app.libs.utils import common_render, redirect_back_url
 from app.models.user import User
-# from flask_login import current_user
-# from flask_sqlalchemy import get_debug_queries
-# from flask_wtf.csrf import CSRFError
+from flask_login import current_user
 
 from app.extensions import login_manager, db, csrf, migrate
 from app.exceptions.base import APIException, HTTPException, UnknownException, WebException
@@ -27,7 +26,6 @@ from app.libs.utils import ep_meta, route_meta_infos
 
 def create_app(environment='development'):
     app = Flask(__name__, static_url_path='/', static_folder='templates')
-    # app = Flask(__name__)
     app.config['ENV'] = environment
     env = app.config.get('ENV')
 
@@ -62,11 +60,20 @@ def mount_router(app):
         if info:
             ep_meta.setdefault(ep, info)
 
+
 def register_before_request(app):
     @app.before_request
     def request_cost_time():
         g.request_start_time = time.time()
         g.request_time = lambda: "%.5f" % (time.time() - g.request_start_time)
+
+    @app.before_request
+    def request_no_auth():
+        url = request.path
+        login_url = url_for('cms.user+login')
+        if not current_user.is_authenticated and url != login_url and not re.match('.*(?:css|less|js|png|jpg)$', url):
+            flash('请登录')
+            return redirect(login_url)
 
 
 def register_after_request(app):
@@ -95,6 +102,8 @@ def register_after_request(app):
             )
             app.logger.debug(message)
         return resp
+
+
 # def register_logging(app):
 #     class RequestFormatter(logging.Formatter):
 #
@@ -205,14 +214,3 @@ def register_commands(app):
             db.session.add(admin_account)
         db.session.commit()
         click.echo('创建成功.')
-
-# def register_request_handlers(app):
-#     @app.after_request
-#     def query_profiler(response):
-#         for q in get_debug_queries():
-#             if q.duration >= app.config['BLUELOG_SLOW_QUERY_THRESHOLD']:
-#                 app.logger.warning(
-#                     'Slow query: Duration: %fs\n Context: %s\nQuery: %s\n '
-#                     % (q.duration, q.context, q.statement)
-#                 )
-#         return response
