@@ -1,0 +1,35 @@
+{% extends 'layout/index.html' %}
+{% block title %}
+    系统基本参数--layui后台管理模板
+{% endblock %}
+{% block css %}
+    {{ super() }}
+    <style type="text/css">
+		.layui-table td, .layui-table th{ text-align: center; }
+		.layui-table td{ padding:15px; }
+	</style>
+{% endblock %}
+{% block body %}
+    <div class="childrenBody">
+    <table class="layui-table">
+        <colgroup>
+            <col>
+            <col>
+        </colgroup>
+        <thead>
+            <tr>
+                <th>参数说明</th>
+                <th>参数值</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for k,v in info.items() %}
+                <tr>
+                    <td>{{ k }}</td>
+                    <td>{{ v }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

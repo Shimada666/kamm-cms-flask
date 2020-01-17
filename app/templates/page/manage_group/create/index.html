@@ -1,0 +1,55 @@
+{% extends 'layout/index.html' %}
+{% import 'macros/edit_group/index.html' as edit_group %}
+{% block macrocss %}
+    {{ Helper.get_style('macros/edit_group/index.less')|safe }}
+{% endblock %}
+{% block body %}
+    <div class="childrenBody">
+{#        <form class="layui-form" style="width:80%;" method="post">#}
+{#            <div class="layui-form-item">#}
+{#                <label class="layui-form-label">分组名称</label>#}
+{#                <div class="layui-input-block">#}
+{#                    <input type="text" name="name" class="layui-input" lay-verify="required"#}
+{#                           placeholder="请输入分组名称">#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="layui-form-item">#}
+{#                <label class="layui-form-label">分组描述</label>#}
+{#                <div class="layui-input-block">#}
+{#                    <input type="text" name="info" value="123" class="layui-input" lay-verify="required"#}
+{#                           placeholder="请输入分组描述">#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="layui-form-item">#}
+{#                <label class="layui-form-label">分配权限</label>#}
+{#                {% for k,v in ep_infos.items() %}#}
+{#                    {% set i=loop.index0 %}#}
+{#                    <div class="layui-form auths-form">#}
+{#                        <div class="layui-input-block">#}
+{#                            <input type="checkbox" class="all-auths" name="" title="{{ k }}" lay-skin="primary" lay-filter="all-auths">#}
+{#                        </div>#}
+{#                        <div class="layui-input-block">#}
+{#                            <div class="auths">#}
+{#                                {% for auth,ep in v.items() %}#}
+{#                                    <input type="checkbox" name="auths-{{ i*100 + loop.index0 }}" value="{{ auth }}"#}
+{#                                           title="{{ auth }}" lay-skin="primary" lay-filter="auth">#}
+{#                                {% endfor %}#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">#}
+{#            <div class="layui-form-item">#}
+{#                <div class="layui-input-block">#}
+{#                    <button class="layui-btn" name="submit" lay-submit="" lay-filter="">立即提交</button>#}
+{#                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>#}
+{#                </div>#}
+{#            </div>#}
+{#        </form>#}
+    {{ edit_group.render(ep_infos) }}
+    </div>
+{% endblock %}
+{% block macrojs %}
+    {{ Helper.get_script('macros/edit_group/index.js')|safe }}
+{% endblock %}

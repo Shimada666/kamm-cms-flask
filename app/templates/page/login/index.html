@@ -1,0 +1,21 @@
+{% extends 'layout/index.html' %}
+{% block title %}登录--layui后台管理模板{% endblock %}
+{% block body %}
+    <div class="mask"></div>
+    <div class="login">
+        <h1>kamm-管理登录</h1>
+        <form action="{{ url_for("cms.user+login") }}" method="post" class="layui-form">
+            <div class="layui-form-item">
+                <input class="layui-input" name="username" placeholder="用户名" lay-verify="required" type="text" value="admin"
+                       autocomplete="off">
+            </div>
+            <div class="layui-form-item">
+                <input class="layui-input" name="password" placeholder="密码" lay-verify="required" type="password" value="admin"
+                       autocomplete="off">
+            </div>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button class="layui-btn login_btn" lay-submit="" lay-filter="login" name="submit" type="submit">登录</button>
+        </form>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,67 @@
+{% macro render(groups,can_update_username=True,endpoint=None) %}
+    <form class="layui-form" style="width:90%;" {% if endpoint %} action="{{ url_for(endpoint) }}" {% endif %}
+          method="post">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                {% if can_update_username %}
+                    <input type="text" name="username" class="layui-input" lay-verify="required" placeholder="请输入用户名称">
+                {% else %}
+                    <input type="text" name="username" class="layui-input layui-disabled" lay-verify="required" placeholder="请输入用户名称"
+                       readonly="readonly">
+                {% endif %}
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">邮箱</label>
+            <div class="layui-input-block">
+                <input type="email" name="email" class="layui-input" lay-verify="" placeholder="请输用户邮箱">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+                <input type="password" name="password" class="layui-input" lay-verify="required"
+                       placeholder="请输入密码">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">确认密码</label>
+            <div class="layui-input-block">
+                <input type="password" name="confirm_password" class="layui-input" lay-verify="required"
+                       placeholder="请重新输入密码">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选择分组</label>
+            <div class="layui-input-block">
+                <div class="layui-inline">
+                    <select name="group_id">
+                        <option value="">请选择分组</option>
+                        {% for group in groups %}
+                            <option title="group" value="{{ group.id }}">{{ group.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="layui-unselect layui-form-select">
+                        <div class="layui-select-title"><input type="text" placeholder="请选择分组" value="" readonly=""
+                                                               class="layui-input layui-unselect"><i
+                                class="layui-edge"></i>
+                        </div>
+                        <dl class="layui-anim layui-anim-upbit">
+                            {% for group in groups %}
+                                <dd lay-value="{{ group.id }}" class="">{{ group.name }}</dd>
+                            {% endfor %}
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" name="submit" lay-submit="" lay-filter="">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+{% endmacro %}
