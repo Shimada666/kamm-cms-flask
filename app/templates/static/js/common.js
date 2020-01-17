@@ -44,7 +44,6 @@ layui.use(['form', 'layer', 'jquery'], function () {
                     //正常情况就不统一处理了
                 }
             } catch (e) {
-                console.log('返回数据不为json类型!')
             }
         },
         statusCode: {}

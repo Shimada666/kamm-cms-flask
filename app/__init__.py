@@ -13,7 +13,7 @@ import click
 import time
 import json
 import re
-from flask import Flask, request, url_for, g, redirect, flash
+from flask import Flask, request, url_for, g, redirect
 from app.libs.utils import common_render, redirect_back_url
 from app.models.user import User
 from flask_login import current_user
@@ -72,7 +72,6 @@ def register_before_request(app):
         url = request.path
         login_url = url_for('cms.user+login')
         if not current_user.is_authenticated and url != login_url and not re.match('.*(?:css|less|js|png|jpg)$', url):
-            flash('请登录')
             return redirect(login_url)
 
 
@@ -82,12 +81,7 @@ def register_after_request(app):
         log_config = app.config.get('LOG')
         if not log_config['REQUEST_LOG']:
             return resp
-        message = '[%s] -> [%s] from:%s costs:%.3f ms' % (
-            request.method,
-            request.path,
-            request.remote_addr,
-            float(g.request_time()) * 1000
-        )
+        message = f'[{request.method}] -> [{request.path}] from:{request.remote_addr} costs:{float(g.request_time()) * 1000:.2f} ms '
         if log_config['LEVEL'] == 'INFO':
             app.logger.info(message)
         elif log_config['LEVEL'] == 'DEBUG':
