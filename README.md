@@ -78,7 +78,6 @@ python wsgi.py
     │   │   ├── UrlManager.py
     │   │   └── utils.py
     │   ├── models                          存放数据模型的文件夹
-    │   │   ├── articles.py
     │   │   ├── friend_links.py
     │   │   └── user.py
     │   ├── templates
@@ -99,8 +98,6 @@ python wsgi.py
     │   │       │   └──                     静态图片
     │   │       ├── js
     │   │       │   └──                     一些公共js，将来会优化合并
-    │   │       ├── json
-    │   │       │   └──                     静态数据，将来会删除
     │   │       └── layui
     │   │           └──                     layui的静态文件
     │   └── validtors
