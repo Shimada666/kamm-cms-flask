@@ -149,11 +149,10 @@ def register_blueprints(app):
 
 def register_shell_context(app: Flask):
     from app.models.user import User, Group, Auth
-    from app.models.articles import Article
     from app.models.friend_links import FriendLinks
     @app.shell_context_processor
     def make_shell_context():
-        return dict(db=db, User=User, Article=Article, FriendLinks=FriendLinks, Group=Group, Auth=Auth)
+        return dict(db=db, User=User, FriendLinks=FriendLinks, Group=Group, Auth=Auth)
 
 
 def register_errors(app):

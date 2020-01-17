@@ -3,6 +3,7 @@ demo地址 [http://r1.cqupt.icu:5000](http://r1.cqupt.icu:5000)
 ## 安装使用
 确保您安装了pipenv, 以及python解释器版本为3.6以上  
 
+
 ```shell script
 # 创建python
 pipenv --three
@@ -51,6 +52,7 @@ python wsgi.py
     │   │   │   ├── error.py
     │   │   │   ├── __init__.py
     │   │   │   ├── system.py
+    │   │   │   ├── auth.py
     │   │   │   └── user.py
     │   │   ├── demo                        demo模块
     │   │   │   ├── articles.py
