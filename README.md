@@ -55,7 +55,6 @@ python wsgi.py
     │   │   │   ├── auth.py
     │   │   │   └── user.py
     │   │   ├── demo                        demo模块
-    │   │   │   ├── articles.py
     │   │   │   ├── friend_links.py
     │   │   │   └── __init__.py
     │   │   ├── home.py
@@ -69,7 +68,6 @@ python wsgi.py
     │   │   └── __init__.py
     │   ├── extensions.py                   flask扩展文件夹
     │   ├── fakes                           做假数据的脚本
-    │   │   ├── articles.py
     │   │   └── friend_links.py
     │   ├── __init__.py                     程序工厂文件
     │   ├── libs 一些工具类
@@ -83,12 +81,12 @@ python wsgi.py
     │   ├── templates
     │   │   ├── favicon.ico                 网站图标
     │   │   ├── layout                      布局模版 css，js，html同一文件夹
-    │   │   │   ├── index.css 
+    │   │   │   ├── index.less
     │   │   │   ├── index.html
     │   │   │   └── index.js
     │   │   ├── page                        css，js，html同一文件夹
     │   │   │   └── index
-    │   │   │       ├── index.css
+    │   │   │       ├── index.less
     │   │   │       ├── index.html
     │   │   │       └── index.js
     │   │   └── static
