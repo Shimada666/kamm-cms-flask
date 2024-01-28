@@ -201,9 +201,11 @@ def register_commands(app):
             click.echo('管理员账户已存在...正在更新帐号密码为admin...')
             admin_account.username = 'admin'
             admin_account.set_password('admin')
+            admin_account.set_admin()
         else:
             admin_account = User(username='admin')
             admin_account.set_password('admin')
+            admin_account.set_admin()
             db.session.add(admin_account)
         db.session.commit()
         click.echo('创建成功.')
