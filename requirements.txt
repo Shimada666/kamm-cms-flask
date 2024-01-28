@@ -1,7 +1,7 @@
 alembic==1.13.1
 click==8.1.7
 cymysql==0.9.14
-Flask==1.1.2
+Flask==2.2.5
 Flask-Login==0.4.1
 Flask-Migrate==2.5.2
 Flask-Session==0.3.1
