@@ -1,5 +1,4 @@
 # kamm - 一个简单的flask cms框架
-demo地址 [http://r1.cqupt.icu:5000](http://r1.cqupt.icu:5000)
 ## 安装使用
 确保您安装了pipenv, 以及python解释器版本为3.6以上  
 
