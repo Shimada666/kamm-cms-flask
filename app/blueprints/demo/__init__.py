@@ -1,10 +1,3 @@
-"""
-    :author: Shimada666
-    :url: https://github.com/shimada666
-    :copyright: © 2019 Shimada666 <Shimada666@foxmail.com>
-    :license: MIT, see LICENSE for more details.
-"""
-
 from flask import Blueprint
 from app.libs.utils import common_render
 
@@ -13,7 +6,9 @@ def create_demo():
     demo = Blueprint('demo', __name__)
 
     from .friend_links import friend_links_rp
+    from .book import book_rp
     friend_links_rp.register(demo)
+    book_rp.register(demo)
 
     return demo
 

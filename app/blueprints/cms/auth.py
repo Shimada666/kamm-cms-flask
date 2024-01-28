@@ -1,10 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-    :author: Shimada666
-    :url: https://github.com/shimada666
-    :copyright: © 2019 Shimada666 <Shimada666@foxmail.com>
-    :license: MIT, see LICENSE for more details.
-"""
+
 from app.libs.redprints import Redprint
 from app.libs.utils import redirect_back_url, common_render, get_ep_infos, find_auth_module
 from app.libs.decorators import admin_required

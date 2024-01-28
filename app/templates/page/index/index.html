@@ -1,5 +1,5 @@
 {% extends 'layout/index.html' %}
-{% block title %}layui后台管理模板{% endblock %}
+{% block title %}图书管理系统{% endblock %}
 {% block css %}
     {{ super() }}
     <link rel="stylesheet" href="{{ url_for('static',filename='static/css/main.css') }}" media="all"/>
@@ -10,7 +10,7 @@
             <!-- 顶部 -->
             <div class="layui-header header">
                 <div class="layui-main">
-                    <a href="#" class="logo">layui后台管理</a>
+                    <a href="#" class="logo">图书管理系统</a>
                     <!-- 显示/隐藏菜单 -->
                     <a href="javascript:;" class="iconfont hideMenu icon-menu1"></a>
                     <!-- 搜索 -->
@@ -118,10 +118,6 @@
                 </div>
             </div>
             <!-- 底部 -->
-            <div class="layui-footer footer">
-                <p>copyright @2019 Shimada666　　<a onclick="donation()" class="layui-btn layui-btn-danger layui-btn-small">捐赠作者</a>
-                </p>
-            </div>
         </div>
         <!-- 移动导航 -->
         <div class="site-tree-mobile layui-hide"><i class="layui-icon">&#xe602;</i></div>

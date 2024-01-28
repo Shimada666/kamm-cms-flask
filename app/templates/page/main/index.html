@@ -1,5 +1,5 @@
 {% extends 'layout/index.html' %}
-{% block title %}layui后台管理模板{% endblock %}
+{% block title %}图书管理系统{% endblock %}
 {% block css %}
     {{ super() }}
     <link rel="stylesheet" href="{{ url_for('static',filename='static/css/main.css') }}" media="all"/>
@@ -47,58 +47,16 @@
                     </div>
                     <div class="panel_word imgAll">
                         <span>999</span>
-                        <cite>图片总数</cite>
-                    </div>
-                </a>
-            </div>
-            <div class="panel col">
-                <a href="javascript:alert('暂不可用, 待开发!');">
-                    <div class="panel_icon" style="background-color:#F7B824;">
-                        <i class="iconfont icon-wenben" data-icon="icon-wenben"></i>
-                    </div>
-                    <div class="panel_word waitNews">
-                        <span>999</span>
-                        <cite>待审核文章</cite>
-                    </div>
-                </a>
-            </div>
-            <div class="panel col max_panel">
-                <a href="javascript:alert('暂不可用, 待开发!');">
-                    <div class="panel_icon" style="background-color:#2F4056;">
-                        <i class="iconfont icon-text" data-icon="icon-text"></i>
-                    </div>
-                    <div class="panel_word allNews">
-                        <span>999</span>
-                        <em>文章总数</em>
-                        <cite>文章列表</cite>
+                        <cite>图书总数</cite>
                     </div>
                 </a>
             </div>
         </div>
-        <blockquote class="layui-elem-quote explain">
-            <p>本CMS系统前端为
-                <a href="https://github.com/BrotherMa/layuiCMS" target="_blank"
-                   class="layui-btn layui-btn-mini layui-btn-danger">BrotherMa</a>
-                开发, 基于LayUI 1.0.9版本, 我使用了其前端代码, 并修改了代码结构与部分代码
-            </p>
-            <p>LayUI开发文档地址：
-                <a class="layui-btn layui-btn-mini" target="_blank" href="http://www.layui.com/doc">点此跳转</a>
-            </p>
-            <p>此项目文档地址：
-                <a class="layui-btn layui-btn-mini" target="_blank" href="https://github.com/Shimada666/kamm-cms-flask">点此跳转</a>
-            </p>
-        </blockquote>
         <div class="row">
             <div class="col">
                 <blockquote class="layui-elem-quote title">更新日志</blockquote>
                 <div class="layui-elem-quote layui-quote-nm">
-                    <h3># v? - 2019-12-08</h3>
-                    <p>亮点: 使用了less简便开发同时保持对css的兼容, 良好的目录结构, 使html/css/js同处一个文件夹下, 易于开发</p>
-                    <p>初版, 完成了最最最基础的功能</p>
-                    <h3># v0.0.1 - 2020-01-18</h3>
-                    <p>更新内容：加入权限管理，用户添加，统一异常处理等功能，优化了代码，一个最简易的版本已经开发出来了。
-                        <a href="https://github.com/Shimada666/kamm-cms-flask" target="_blank"
-                           class="layui-btn layui-btn-mini layui-btn-danger">Github</a></p>
+                    <h3>图书管理系统第一版实现啦！包含管理员和普通用户角色，欢迎使用</h3>
                 </div>
             </div>
         </div>

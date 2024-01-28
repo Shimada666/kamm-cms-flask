@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-    :author: Shimada666
-    :url: https://github.com/shimada666
-    :copyright: © 2019 Shimada666 <Shimada666@foxmail.com>
-    :license: MIT, see LICENSE for more details.
-"""
 import logging
 import os
 from logging.handlers import SMTPHandler, RotatingFileHandler
@@ -150,9 +143,10 @@ def register_blueprints(app):
 def register_shell_context(app: Flask):
     from app.models.user import User, Group, Auth
     from app.models.friend_links import FriendLinks
+    from app.models.book import Book
     @app.shell_context_processor
     def make_shell_context():
-        return dict(db=db, User=User, FriendLinks=FriendLinks, Group=Group, Auth=Auth)
+        return dict(db=db, User=User, FriendLinks=FriendLinks, Group=Group, Auth=Auth, Book=Book)
 
 
 def register_errors(app):

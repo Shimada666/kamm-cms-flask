@@ -1,10 +1,3 @@
-"""
-    :author: Shimada666
-    :url: https://github.com/shimada666
-    :copyright: © 2019 Shimada666 <Shimada666@foxmail.com>
-    :license: MIT, see LICENSE for more details.
-"""
-
 # 安全性配置
 from app.config.setting import BaseConfig
 import sys

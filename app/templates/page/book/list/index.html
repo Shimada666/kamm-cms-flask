@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="childrenBody">
-    <span id="delete-url" style="display: none">/demo/friend-links/delete</span>
+    <span id="delete-url" style="display: none">/demo/book/delete</span>
 	<div class="layui-form items-list">
 	  	<table class="layui-table">
 		    <colgroup>
@@ -19,11 +19,11 @@
 				<tr>
 {#					<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>#}
                     <th><input type="checkbox" name="" lay-skin="primary" lay-filter="all-choose"></th>
-					<th>网站名称</th>
-					<th>网站地址</th>
-					<th>站长邮箱</th>
+					<th>图书名称</th>
+					<th>图书作者</th>
+                    <th>图书描述</th>
+					<th>图书链接</th>
 					<th>添加时间</th>
-					<th>展示位置</th>
 					<th>操作</th>
 				</tr>
 		    </thead>
@@ -33,14 +33,10 @@
                     <tr data-id="{{ link.id }}">
                         <td><input type="checkbox" name="checked" lay-skin="primary" lay-filter="choose"></td>
                         <td>{{ link.title }}</td>
+                        <td>{{ link.author }}</td>
+                        <td>{{ link.description }}</td>
                         <td><a class="active" target="_blank" href="{{ link.url }}">{{ link.url }}</a></td>
-                        <td>{{ link.email }}</td>
                         <td>{{ link.create_time }}</td>
-                        {% if link.show_address == True %}
-                            <td>首页</td>
-                        {% else %}
-                            <td>子页</td>
-                        {% endif %}
                         <td>
                             {#<a class="layui-btn layui-btn-mini links-edit"><i class="iconfont icon-edit"></i> 编辑</a>#}
                             <a class="layui-btn layui-btn-danger layui-btn-mini del" data-id="{{ link.id }}"><i class="layui-icon">&#xe640;</i>删除</a>

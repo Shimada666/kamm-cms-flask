@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-    :author: Shimada666
-    :url: https://github.com/shimada666
-    :copyright: © 2019 Shimada666 <Shimada666@foxmail.com>
-    :license: MIT, see LICENSE for more details.
-"""
-
 from flask import Blueprint, render_template
 from app.libs.utils import common_render
 from app.libs.decorators import admin_required, group_required
@@ -26,28 +18,6 @@ def index():
 
 
 @home_bp.route('/404')
-@route_meta(auth='测试', module='测试')
 @group_required
 def not_found():
-    return common_render('page/error/index.html', msg='测试', code=123)
-
-
-@home_bp.route('/405')
-@route_meta(auth='测试1', module='测试')
-@group_required
-def not_found1():
-    return common_render('page/error/index.html', msg='测试', code=123)
-
-
-@home_bp.route('/406')
-@route_meta(auth='测试2', module='测试1')
-@group_required
-def not_found2():
-    return common_render('page/error/index.html', msg='测试', code=123)
-
-
-@home_bp.route('/407')
-@route_meta(auth='测试3', module='测试2')
-@group_required
-def not_found3():
     return common_render('page/error/index.html', msg='测试', code=123)

@@ -175,15 +175,9 @@ layui.config({
 			area: '310px',
 			shade: 0.8,
 			id: 'LAY_layuipro',
-			btn: ['火速围观'],
+			btn: ['点击查看'],
 			moveType: 1,
-			content: '<div style="padding:15px 20px; text-align:justify; line-height: 22px; text-indent:2em;border-bottom:1px solid #e2e2e2;">' +
-				'<p>一套flask+layui的cms模版,主要面向不擅于前端的后端的程序员使用,样式美观,服务端渲染.</p>' +
-				'<p>感谢<a href="https://github.com/BrotherMa/layuiCMS" class="active" target="_blank"> BrotherMa </a>提供的前端界面样式</p>' +
-				'<p>感谢<a href="http://7yue.pro/" class="active" target="_blank"> 林间有风团队 </a>的lin-cms-flask' +
-				'<p>感谢<a href="https://github.com/greyli" class="active" target="_blank"> greyli </a> 李辉老师的flask教程 </p>' +
-				'<p>由于以上项目/教程, kamm-cms框架才得以诞生, 对此表示感谢!</p>' +
-				'</div>',
+			content: '一套带权限的图书管理系统！',
 			success: function (layero) {
 				var btn = layero.find('.layui-layer-btn');
 				btn.css('text-align', 'center');
